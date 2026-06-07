@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service Detail — Lumaa Salon</title>
+  <link rel="icon" type="image/webp" href="images/lumaa-logo-white.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Playfair+Display:ital,wght@0,600;1,700&family=Jost:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #EED9BF; --sage: #9CA175; --offwhite: #F1F1F1;
+      --earth: #937B67; --deep: #34382A; --ink: #2B2922; --white: #FFFFFF;
+      --serif: 'Playfair Display', serif; --sans: 'Jost', sans-serif;
+    }
+    body { background: var(--offwhite); font-family: var(--sans); color: var(--ink); }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; }
+
+    .sp-nav {
+      background: var(--white); padding: 14px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(43,41,34,0.08);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .sp-logo { height: 34px; width: auto; }
+    .sp-nav-links { display: flex; gap: 32px; }
+    .sp-nav-links a { font-size: 0.82rem; letter-spacing: 0.08em; color: rgba(43,41,34,0.65); transition: color .2s; }
+    .sp-nav-links a:hover { color: var(--ink); }
+
+    .sp-hero { background: var(--white); padding: 44px 48px 36px; border-bottom: 1px solid rgba(43,41,34,0.08); }
+    .sp-back {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--sage); font-weight: 600; margin-bottom: 18px; transition: gap .2s;
+    }
+    .sp-back:hover { gap: 11px; }
+    .sp-eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--earth); font-weight: 600; margin-bottom: 10px;
+    }
+    .sp-hero h1 {
+      font-family: var(--serif); font-weight: 600;
+      font-size: clamp(2rem, 4vw, 3rem); color: var(--ink); letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+    .sp-desc { font-size: 0.95rem; color: rgba(43,41,34,0.62); line-height: 1.7; max-width: 640px; }
+
+    .sp-body { max-width: 1140px; margin: 0 auto; padding: 48px 40px 80px; }
+    .detail-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .gallery-item { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; }
+    .gallery-item img {
+      width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block;
+      transition: transform .5s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-item .g-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(43,41,34,0.72) 0%, transparent 100%);
+      color: var(--cream); font-size: 0.75rem; letter-spacing: 0.14em;
+      text-transform: uppercase; padding: 28px 16px 14px;
+      opacity: 0; transition: opacity .3s ease;
+    }
+    .gallery-item:hover .g-label { opacity: 1; }
+
+    /* Lightbox */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(43,41,34,0.94); z-index: 999;
+      align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lb-img { max-width: 88vw; max-height: 88vh; border-radius: 8px; object-fit: contain; }
+    .lb-close {
+      position: absolute; top: 20px; right: 24px;
+      color: rgba(238,217,191,0.7); font-size: 2rem; cursor: pointer; line-height: 1;
+      transition: color .2s;
+    }
+    .lb-close:hover { color: var(--cream); }
+    .lb-prev, .lb-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      color: rgba(238,217,191,0.7); font-size: 2.2rem; cursor: pointer;
+      background: rgba(43,41,34,0.4); border: none; padding: 12px 16px;
+      border-radius: 8px; transition: background .2s, color .2s;
+    }
+    .lb-prev:hover, .lb-next:hover { background: rgba(43,41,34,0.7); color: var(--cream); }
+    .lb-prev { left: 16px; }
+    .lb-next { right: 16px; }
+
+    .sp-foot { background: var(--deep); color: rgba(238,217,191,0.5); text-align: center; padding: 20px 40px; font-size: 0.76rem; }
+    .sp-foot a { color: rgba(238,217,191,0.7); }
+
+    #notFound { display: none; text-align: center; padding: 80px 20px; }
+    #notFound h2 { font-family: var(--serif); color: var(--ink); margin-bottom: 12px; }
+    #notFound a { color: var(--sage); text-decoration: underline; }
+
+    @media (max-width: 760px) { .detail-gallery { grid-template-columns: repeat(2,1fr); gap: 10px; } }
+    @media (max-width: 480px) { .detail-gallery { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) {
+      .sp-nav { padding: 14px 24px; }
+      .sp-hero { padding: 32px 24px 26px; }
+      .sp-body { padding: 32px 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="sp-nav">
+    <a href="index.html">
+      <img src="images/lumaa-logo-olive.webp" alt="Lumaa Salon" class="sp-logo" />
+    </a>
+    <div class="sp-nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="sp-hero" id="heroBlock">
+    <a href="#" class="sp-back" id="backLink">&#8592; Back to Services</a>
+    <p class="sp-eyebrow" id="eyebrow"></p>
+    <h1 id="serviceTitle">Loading…</h1>
+    <p class="sp-desc" id="serviceDesc"></p>
+  </div>
+
+  <div class="sp-body">
+    <div class="detail-gallery" id="gallery"></div>
+    <div id="notFound">
+      <h2>Service not found</h2>
+      <p><a href="index.html#services">Browse all services</a></p>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" id="lbClose">&times;</button>
+    <button class="lb-prev" id="lbPrev">&#8249;</button>
+    <img src="" alt="" class="lb-img" id="lbImg" />
+    <button class="lb-next" id="lbNext">&#8250;</button>
+  </div>
+
+  <footer class="sp-foot">
+    <p>&copy; 2026 Lumaa Salon &nbsp;&middot;&nbsp; <a href="index.html#contact">Contact Us</a></p>
+  </footer>
+
+  <script>
+    const BASE = 'https://images.unsplash.com/photo-';
+    const Q = '?auto=format&fit=crop&w=800&q=82';
+
+    const SERVICES = {
+      /* ── WOMEN ────────────────────────────────────────────── */
+      'women-hair-rituals': {
+        gender: 'Women', back: 'womens-services.html',
+        title: 'Hair Rituals',
+        desc: 'Haircut, blowdry, restyle, heat styling, oil therapy, hair spa, colour atelier & smoothening treatments.',
+        photos: [
+          { id: '1522337360788-8b13dee7a37e', label: 'Haircut & Restyle' },
+          { id: '1560066984-138dadb4c035',   label: 'Blowdry Styling' },
+          { id: '1580618672591-eb180b1a973f', label: 'Colour Atelier' },
+          { id: '1527799820374-dcf8d9d4a388', label: 'Heat Styling' },
+          { id: '1519699487674-3dc365406de7', label: 'Oil Therapy' },
+          { id: '1562322140-8baeececf3df',   label: 'Hair Spa' },
+          { id: '1559599746-8823b38544c6',   label: 'Smoothening Treatment' },
+          { id: '1633681926022-84c23e8cb2d6', label: 'Curling & Waves' },
+          { id: '1595475207225-428b62bda831', label: 'Blowout & Volume' },
+        ]
+      },
+      'women-nail-atelier': {
+        gender: 'Women', back: 'womens-services.html',
+        title: 'Nail Atelier',
+        desc: 'Gel & acrylic extensions, French art, marble art, ombre, cat eye, bridal nail art & gel nail paint.',
+        photos: [
+          { id: '1604654894610-df63bc536371', label: 'Gel Extensions' },
+          { id: '1526308182893-6d5b98870c13', label: 'Nail Polish Art' },
+          { id: '1604655887691-1ee03a9bcdb8', label: 'French Art' },
+          { id: '1519014816548-bf5fe059798b', label: 'Bridal Nail Art' },
+          { id: '1604654894610-df63bc536371', label: 'Acrylic Extensions' },
+          { id: '1568032460370-d3b68a4cf14f', label: 'Marble Art' },
+          { id: '1604655748187-a8e6a7a93e4f', label: 'Ombre Nails' },
+          { id: '1588867522-f34d2c46617d',   label: 'Cat Eye Nails' },
+          { id: '1604655954014-f8c40a0a76da', label: 'Gel Nail Paint' },
+        ]
+      },
+      'women-skin-therapy': {
+        gender: 'Women', back: 'womens-services.html',
+        title: 'Skin Therapy',
+        desc: 'Threading, facial waxing, D-tan, face bleach, clean-up ritual, facial therapies, hydra facial & body waxing.',
+        photos: [
+          { id: '1570172619644-dfd03ed5d881', label: 'Hydra Facial' },
+          { id: '1591343913547-3df82baf8edc', label: 'Skin Clean-up' },
+          { id: '1512290923902-8a9f81dc236c', label: 'Facial Therapy' },
+          { id: '1556228720-da4f93b9ff24',   label: 'D-Tan Treatment' },
+          { id: '1552693673-1bf958298935',   label: 'Face Bleach' },
+          { id: '1614852207236-57e2f7691571', label: 'Facial Waxing' },
+          { id: '1598440947619-2c35fc9aa908', label: 'Threading' },
+          { id: '1540555700478-4be289fbecef', label: 'Body Waxing' },
+          { id: '1616394584738-fc6e612e71b9', label: 'Glow Treatment' },
+        ]
+      },
+      'women-body-therapies': {
+        gender: 'Women', back: 'womens-services.html',
+        title: 'Body Therapies',
+        desc: 'Body bleach, body polishing & body massage for complete restoration and rejuvenation.',
+        photos: [
+          { id: '1544161515-4ab6ce6db874',   label: 'Body Massage' },
+          { id: '1519824145371-296894a0daa9', label: 'Spa Massage' },
+          { id: '1600334129128-685c5582fd35', label: 'Body Polishing' },
+          { id: '1515377614189-f2e9cff7c70e', label: 'Deep Tissue' },
+          { id: '1568452834917-a22b0f9dddb3', label: 'Relaxation Massage' },
+          { id: '1540555700478-4be289fbecef', label: 'Body Bleach' },
+          { id: '1507652313519-d4e9174996dd', label: 'Spa Ritual' },
+          { id: '1571019613454-1cb2f99b2d8b', label: 'Full Body Treatment' },
+          { id: '1519824145371-296894a0daa9', label: 'Rejuvenation Therapy' },
+        ]
+      },
+      'women-hand-foot': {
+        gender: 'Women', back: 'womens-services.html',
+        title: 'Hand & Foot Rituals',
+        desc: 'Manicure, pedicure, hand & foot massage, foot cleanse, hand & foot D-tan care treatments.',
+        photos: [
+          { id: '1519014816548-bf5fe059798b', label: 'Pedicure' },
+          { id: '1604654894610-df63bc536371', label: 'Manicure' },
+          { id: '1526308182893-6d5b98870c13', label: 'Nail Art' },
+          { id: '1510557880182-3d4d3cba35a5', label: 'Foot Spa' },
+          { id: '1587334274328-64186a80aeee', label: 'Hand Massage' },
+          { id: '1612977247657-30ab7bf21adb', label: 'Foot Cleanse' },
+          { id: '1604655887691-1ee03a9bcdb8', label: 'Gel Nails' },
+          { id: '1519014816548-bf5fe059798b', label: 'D-Tan Foot' },
+          { id: '1587334274328-64186a80aeee', label: 'Foot Massage' },
+        ]
+      },
+      'women-makeup-atelier': {
+        gender: 'Women', back: 'womens-services.html',
+        title: 'Makeup Atelier',
+        desc: 'Eye makeup, party makeup, sagan, bridal HD & airbrush makeup, destination makeup & saree draping.',
+        photos: [
+          { id: '1487412947147-5cebf100ffc2', label: 'Party Makeup' },
+          { id: '1614854262318-831574f15f1f', label: 'Bridal HD Makeup' },
+          { id: '1516975080664-ed2fc6a32937', label: 'Airbrush Makeup' },
+          { id: '1549576490-b0a3d959d5e0',   label: 'Bridal Look' },
+          { id: '1488426041174-c44d5b2cf6e3', label: 'Eye Makeup' },
+          { id: '1512903981174-b886e3b30b4c', label: 'Lip Art' },
+          { id: '1494790108377-be9c29b29330', label: 'Sagan Makeup' },
+          { id: '1591543620767-582b2e76369e', label: 'Destination Makeup' },
+          { id: '1487412947147-5cebf100ffc2', label: 'Saree Draping Look' },
+        ]
+      },
+
+      /* ── MEN ──────────────────────────────────────────────── */
+      'men-hair-rituals': {
+        gender: 'Men', back: 'mens-services.html',
+        title: 'Hair Rituals',
+        desc: 'Haircut, beard styling, Lumaa special beard, shave, head shave, oil massage & hair spa.',
+        photos: [
+          { id: '1621605815971-fbc98d665033', label: 'Haircut' },
+          { id: '1584308666744-24d5c474f2ae', label: 'Beard Styling' },
+          { id: '1599351431202-1e0f0137899a', label: 'Classic Shave' },
+          { id: '1503951458-0307b3be7789',   label: 'Barber Cut' },
+          { id: '1589893218617-59c71c7f47a2', label: 'Beard Trim' },
+          { id: '1572435617070-9ac36949f3ca', label: 'Head Shave' },
+          { id: '1521590832167-7bcbfaa6381f', label: 'Oil Massage' },
+          { id: '1500648767791-00dcc994a43e', label: 'Hair Spa' },
+          { id: '1614364252087-8a5e91f5af6b', label: 'Lumaa Special Beard' },
+        ]
+      },
+      'men-hair-colour': {
+        gender: 'Men', back: 'mens-services.html',
+        title: 'Hair Colour & Treatments',
+        desc: 'Hair colour, beard colour, highlights, rebonding, smoothening, keratin, hair botox & perming.',
+        photos: [
+          { id: '1634449571010-02389ed0f9b0', label: 'Hair Colour' },
+          { id: '1580618672591-eb180b1a973f', label: 'Highlights' },
+          { id: '1527799820374-dcf8d9d4a388', label: 'Keratin Treatment' },
+          { id: '1560066984-138dadb4c035',   label: 'Smoothening' },
+          { id: '1519699487674-3dc365406de7', label: 'Rebonding' },
+          { id: '1562322140-8baeececf3df',   label: 'Hair Botox' },
+          { id: '1503951458-0307b3be7789',   label: 'Beard Colour' },
+          { id: '1584308666744-24d5c474f2ae', label: 'Perming' },
+          { id: '1621605815971-fbc98d665033', label: 'Colour Styling' },
+        ]
+      },
+      'men-skin-face': {
+        gender: 'Men', back: 'mens-services.html',
+        title: 'Skin & Face',
+        desc: 'Clean-up ritual, facial therapy, hydra facial, D-tan, face bleach, face pack & threading.',
+        photos: [
+          { id: '1570172619644-dfd03ed5d881', label: 'Hydra Facial' },
+          { id: '1591343913547-3df82baf8edc', label: 'Clean-up Ritual' },
+          { id: '1552693673-1bf958298935',   label: 'D-Tan Treatment' },
+          { id: '1614852207236-57e2f7691571', label: 'Facial Therapy' },
+          { id: '1556228720-da4f93b9ff24',   label: 'Face Bleach' },
+          { id: '1512290923902-8a9f81dc236c', label: 'Face Pack' },
+          { id: '1598440947619-2c35fc9aa908', label: 'Threading' },
+          { id: '1540555700478-4be289fbecef', label: 'Skin Glow' },
+          { id: '1616394584738-fc6e612e71b9', label: 'Skin Treatment' },
+        ]
+      },
+      'men-body-rituals': {
+        gender: 'Men', back: 'mens-services.html',
+        title: 'Body Rituals',
+        desc: 'Body polishing, body bleach & waxing services — hand, leg & underarms wax.',
+        photos: [
+          { id: '1519824145371-296894a0daa9', label: 'Spa Massage' },
+          { id: '1544161515-4ab6ce6db874',   label: 'Body Polishing' },
+          { id: '1600334129128-685c5582fd35', label: 'Body Bleach' },
+          { id: '1568452834917-a22b0f9dddb3', label: 'Waxing' },
+          { id: '1515377614189-f2e9cff7c70e', label: 'Leg Wax' },
+          { id: '1540555700478-4be289fbecef', label: 'Underarms Wax' },
+          { id: '1507652313519-d4e9174996dd', label: 'Body Ritual' },
+          { id: '1571019613454-1cb2f99b2d8b', label: 'Body Treatment' },
+          { id: '1544161515-4ab6ce6db874',   label: 'Restoration Therapy' },
+        ]
+      },
+      'men-hand-foot': {
+        gender: 'Men', back: 'mens-services.html',
+        title: 'Hand & Foot',
+        desc: 'Manicure, pedicure, nail cut & file, hand & feet massage and D-tan treatments for men.',
+        photos: [
+          { id: '1519014816548-bf5fe059798b', label: 'Pedicure' },
+          { id: '1587334274328-64186a80aeee', label: 'Manicure' },
+          { id: '1510557880182-3d4d3cba35a5', label: 'Foot Spa' },
+          { id: '1612977247657-30ab7bf21adb', label: 'Hand Massage' },
+          { id: '1526308182893-6d5b98870c13', label: 'Nail Cut & File' },
+          { id: '1604654894610-df63bc536371', label: 'Nail Care' },
+          { id: '1519014816548-bf5fe059798b', label: 'Foot Massage' },
+          { id: '1587334274328-64186a80aeee', label: 'D-Tan Foot' },
+          { id: '1510557880182-3d4d3cba35a5', label: 'Foot Cleanse' },
+        ]
+      },
+      'men-makeup-atelier': {
+        gender: 'Men', back: 'mens-services.html',
+        title: 'Makeup Atelier',
+        desc: 'Basic makeup, high definition makeup, airbrush makeup & destination makeup for every occasion.',
+        photos: [
+          { id: '1500648767791-00dcc994a43e', label: 'Natural Makeup' },
+          { id: '1614854262318-831574f15f1f', label: 'HD Makeup' },
+          { id: '1516975080664-ed2fc6a32937', label: 'Airbrush Makeup' },
+          { id: '1549576490-b0a3d959d5e0',   label: 'Destination Look' },
+          { id: '1488426041174-c44d5b2cf6e3', label: 'Event Makeup' },
+          { id: '1591543620767-582b2e76369e', label: 'Studio Makeup' },
+          { id: '1487412947147-5cebf100ffc2', label: 'Wedding Makeup' },
+          { id: '1494790108377-be9c29b29330', label: 'Grooming Look' },
+          { id: '1512903981174-b886e3b30b4c', label: 'Basic Makeup' },
+        ]
+      },
+    };
+
+    /* ── Render ─────────────────────────────────────────── */
+    const params = new URLSearchParams(window.location.search);
+    const key    = params.get('s');
+    const data   = SERVICES[key];
+
+    if (!data) {
+      document.getElementById('heroBlock').style.display = 'none';
+      document.getElementById('notFound').style.display = 'block';
+    } else {
+      document.title = data.title + ' — Lumaa Salon';
+      document.getElementById('backLink').href = data.back;
+      document.getElementById('backLink').textContent = '← Services for ' + data.gender;
+      document.getElementById('eyebrow').textContent = 'Services for ' + data.gender;
+      document.getElementById('serviceTitle').textContent = data.title;
+      document.getElementById('serviceDesc').textContent = data.desc;
+
+      const gallery = document.getElementById('gallery');
+      data.photos.forEach((p, i) => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.innerHTML = `
+          <img src="${BASE}${p.id}${Q}" alt="${p.label}" loading="lazy" />
+          <span class="g-label">${p.label}</span>`;
+        item.addEventListener('click', () => openLightbox(i));
+        gallery.appendChild(item);
+      });
+    }
+
+    /* ── Lightbox ───────────────────────────────────────── */
+    let currentIdx = 0;
+    const lb     = document.getElementById('lightbox');
+    const lbImg  = document.getElementById('lbImg');
+
+    function openLightbox(idx) {
+      currentIdx = idx;
+      lbImg.src = BASE + data.photos[idx].id + Q;
+      lbImg.alt = data.photos[idx].label;
+      lb.classList.add('open');
+    }
+    function closeLightbox() { lb.classList.remove('open'); lbImg.src = ''; }
+    function prevImg() { currentIdx = (currentIdx - 1 + data.photos.length) % data.photos.length; lbImg.src = BASE + data.photos[currentIdx].id + Q; }
+    function nextImg() { currentIdx = (currentIdx + 1) % data.photos.length; lbImg.src = BASE + data.photos[currentIdx].id + Q; }
+
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    document.getElementById('lbPrev').addEventListener('click', prevImg);
+    document.getElementById('lbNext').addEventListener('click', nextImg);
+    lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevImg();
+      if (e.key === 'ArrowRight') nextImg();
+    });
+  </script>
+
+</body>
+</html>

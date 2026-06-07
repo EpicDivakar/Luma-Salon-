@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luma Salon — Where Beauty Meets Elegance</title>
+  <meta name="description" content="Luma Salon — premium hair, beauty and styling. Where beauty meets elegance." />
+  <link rel="icon" type="image/webp" href="images/lumaa-logo-white.webp" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!--
+    FONTS (4 faces total):
+    1. Playfair Display 600 normal  — section headings, stat numbers
+    2. Playfair Display 700 italic  — hero "Elegance" / service titles bold
+    3. Cormorant Garamond 500 italic — quotes, brand wordmark
+    4. Jost 400 / 600               — all body, labels, nav, eyebrows
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Playfair+Display:ital,wght@0,600;1,700&family=Jost:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar">
+    <a href="#home" class="brand">
+      <!-- white version: visible over hero / dark navbar -->
+      <img src="images/lumaa-logo-white.webp" alt="Lumaa Salon" class="logo logo-white" />
+      <!-- olive version: visible when navbar turns light on scroll -->
+      <img src="images/lumaa-logo-olive.webp" alt="Lumaa Salon" class="logo logo-olive" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#founders">Founders</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <!-- 3-image slider — JS translates track left every 3 s -->
+    <div class="hero-slides">
+      <div class="hero-track">
+        <div class="hero-slide slide-1"></div>
+        <div class="hero-slide slide-2"></div>
+        <div class="hero-slide slide-3"></div>
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Where Beauty<br>Meets <em>Elegance</em></h1>
+    </div>
+    <!-- dot indicators -->
+    <div class="slide-dots">
+      <span class="dot active" data-index="0"></span>
+      <span class="dot" data-index="1"></span>
+      <span class="dot" data-index="2"></span>
+    </div>
+  </section>
+
+  <!-- ===== STATS BAND ===== -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat reveal">
+        <span class="leaf">&#10047;</span>
+        <h3><span class="counter" data-target="10000" data-suffix="+">0+</span></h3>
+        <p>Happy Clients</p>
+      </div>
+      <div class="stat reveal d1">
+        <span class="leaf">&#10047;</span>
+        <h3><span class="counter" data-target="15" data-suffix="+">0+</span></h3>
+        <p>Years of Experience</p>
+      </div>
+      <div class="stat reveal d2">
+        <span class="leaf">&#10047;</span>
+        <h3><span class="counter" data-target="50" data-suffix="+">0+</span></h3>
+        <p>Expert Stylists</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">What We Offer</p>
+        <h2>Our Services</h2>
+        <span class="head-rule"></span>
+      </div>
+      <div class="services-grid">
+
+        <a href="womens-services.html" class="svc-card svc-women reveal">
+          <span class="svc-badge">&#10047;</span>
+          <div class="svc-text">
+            <h3>Women</h3>
+            <p>Explore Services</p>
+          </div>
+        </a>
+
+        <a href="mens-services.html" class="svc-card svc-men reveal d1">
+          <span class="svc-badge">&#10047;</span>
+          <div class="svc-text">
+            <h3>Men</h3>
+            <p>Explore Services</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Our Work</p>
+        <h2>The Gallery</h2>
+        <span class="head-rule"></span>
+      </div>
+      <div class="gallery-grid">
+        <div class="g-item g1 reveal"></div>
+        <div class="g-item g2 reveal d1"></div>
+        <div class="g-item g3 reveal d2"></div>
+        <div class="g-item g4 reveal d3"></div>
+        <div class="g-item g5 reveal d4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOUNDERS ===== -->
+  <section class="founders" id="founders">
+    <div class="container founders-inner">
+      <div class="founders-text reveal">
+        <p class="eyebrow eyebrow-light">Founders</p>
+        <h2>Gagan &amp;<br>Mridul</h2>
+        <p class="founders-quote">"Elevating beauty standards, one client at a time."</p>
+        <span class="founders-rule"></span>
+      </div>
+      <div class="founders-photos reveal d2">
+        <figure class="f-card">
+          <div class="f-photo-wrap">
+            <img src="a-simple-black-silhouette-of-man-in-suit-vector-55942263.avif" alt="Gagan" class="f-photo-img" />
+          </div>
+          <figcaption>
+            <span class="f-name">Gagan</span>
+            <span class="f-title">Co-Founder</span>
+          </figcaption>
+        </figure>
+        <figure class="f-card">
+          <div class="f-photo-wrap">
+            <img src="a-simple-black-silhouette-of-man-in-suit-vector-55942263.avif" alt="Mridul" class="f-photo-img" />
+          </div>
+          <figcaption>
+            <span class="f-name">Mridul</span>
+            <span class="f-title">Brand Manager</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REVIEWS ===== -->
+  <section class="reviews" id="reviews">
+    <div class="container">
+      <div class="reviews-head reveal">
+        <p class="eyebrow">Client Love</p>
+        <h2>What Our Clients Say</h2>
+      </div>
+
+      <div class="reviews-grid">
+        <article class="review-card reveal">
+          <span class="quote-mark">&ldquo;</span>
+          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p class="review-text">Absolutely loved my experience at Lumaa Salon! The staff is incredibly professional and skilled. Got a keratin treatment done and my hair looks absolutely amazing — so smooth and shiny. Highly recommend!</p>
+          <div class="reviewer">
+            <span class="avatar">PS</span>
+            <div>
+              <p class="r-name">Priya Sharma</p>
+              <p class="r-meta">Google Review &middot; Hair Rituals</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card reveal d1">
+          <span class="quote-mark">&ldquo;</span>
+          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p class="review-text">Incredible bridal makeup! I looked stunning on my wedding day. The team was so patient and understood exactly what I wanted. Every detail was perfect. Thank you Lumaa Salon for making my day so special!</p>
+          <div class="reviewer">
+            <span class="avatar">RK</span>
+            <div>
+              <p class="r-name">Ritu Kapoor</p>
+              <p class="r-meta">Google Review &middot; Bridal Couture</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card reveal d2">
+          <span class="quote-mark">&ldquo;</span>
+          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p class="review-text">Best nail extensions I've ever had! The nail technician is an absolute artist. My gel extensions looked so natural and lasted much longer than expected. The nail art was exactly what I had in mind. Will be back!</p>
+          <div class="reviewer">
+            <span class="avatar">AM</span>
+            <div>
+              <p class="r-name">Ananya Mehta</p>
+              <p class="r-meta">Google Review &middot; Nail Atelier</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Read all reviews CTA -->
+      <div class="reviews-cta reveal">
+        <a href="https://share.google/nmSQvt3a3PqKiKRM9" target="_blank" rel="noopener" class="btn-outline-reviews">
+          Read All Reviews &nbsp;&#8594;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BRAND PARTNERS ===== -->
+  <section class="partners">
+    <div class="container">
+      <h2 class="partners-title reveal">Our Partner Brands</h2>
+    </div>
+
+    <div class="brand-marquee-wrap">
+
+      <!-- Row 1 — scrolls RIGHT -->
+      <div class="brand-track track-right">
+        <div class="brand-strip">
+          <div class="brand-cell"><div class="bl bl-loreal"><span class="bl-main">L'OR&#201;AL</span><span class="bl-rule"></span><span class="bl-sub">PROFESSIONNEL</span><span class="bl-sub2">PARIS</span></div></div>
+          <div class="brand-cell"><div class="bl bl-kerastase"><span class="bl-main">K&#201;RASTASE</span><span class="bl-sub">PARIS</span></div></div>
+          <div class="brand-cell"><div class="bl bl-moroccanoil"><span class="mo-m">M</span><span class="bl-main">MOROCCANOIL</span></div></div>
+          <div class="brand-cell"><div class="bl bl-gk"><span class="gk-letters">GK</span><div class="gk-right"><span class="gk-hair">HAIR</span><span class="gk-pro">PROFESSIONAL</span></div></div></div>
+        </div>
+        <div class="brand-strip" aria-hidden="true">
+          <div class="brand-cell"><div class="bl bl-loreal"><span class="bl-main">L'OR&#201;AL</span><span class="bl-rule"></span><span class="bl-sub">PROFESSIONNEL</span><span class="bl-sub2">PARIS</span></div></div>
+          <div class="brand-cell"><div class="bl bl-kerastase"><span class="bl-main">K&#201;RASTASE</span><span class="bl-sub">PARIS</span></div></div>
+          <div class="brand-cell"><div class="bl bl-moroccanoil"><span class="mo-m">M</span><span class="bl-main">MOROCCANOIL</span></div></div>
+          <div class="brand-cell"><div class="bl bl-gk"><span class="gk-letters">GK</span><div class="gk-right"><span class="gk-hair">HAIR</span><span class="gk-pro">PROFESSIONAL</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- Row 2 — scrolls LEFT -->
+      <div class="brand-track track-left">
+        <div class="brand-strip">
+          <div class="brand-cell"><div class="bl bl-dermalogica">dermalogica<sup>&#174;</sup></div></div>
+          <div class="brand-cell"><div class="bl bl-swati"><span class="sw-main">SWATI.</span><span class="sw-sub">COSMETIC LENSES</span></div></div>
+          <div class="brand-cell"><div class="bl bl-furterer"><div class="rf-dots"><span></span><span></span><span></span><span></span></div><span class="rf-spa">SPA</span><span class="rf-rene">REN&#201;</span><span class="rf-name">FURTERER</span><span class="rf-paris">PARIS</span></div></div>
+          <div class="brand-cell"><div class="bl bl-brasil"><span class="bc-main">BRASIL CACAU</span><span class="bc-bar">PROFESSIONAL</span></div></div>
+        </div>
+        <div class="brand-strip" aria-hidden="true">
+          <div class="brand-cell"><div class="bl bl-dermalogica">dermalogica<sup>&#174;</sup></div></div>
+          <div class="brand-cell"><div class="bl bl-swati"><span class="sw-main">SWATI.</span><span class="sw-sub">COSMETIC LENSES</span></div></div>
+          <div class="brand-cell"><div class="bl bl-furterer"><div class="rf-dots"><span></span><span></span><span></span><span></span></div><span class="rf-spa">SPA</span><span class="rf-rene">REN&#201;</span><span class="rf-name">FURTERER</span><span class="rf-paris">PARIS</span></div></div>
+          <div class="brand-cell"><div class="bl bl-brasil"><span class="bc-main">BRASIL CACAU</span><span class="bc-bar">PROFESSIONAL</span></div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="contact">
+    <div class="container ft-main">
+
+      <!-- GET IN TOUCH -->
+      <div class="ft-col">
+        <p class="ft-head">Get in Touch</p>
+
+        <div class="ft-contacts">
+          <div class="ft-item">
+            <div class="ft-icon">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.07 6.07l.95-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="ft-item-body">
+              <a href="tel:+919205809126" class="ft-val">+91 92058 09126</a>
+              <span class="ft-note">Calls &amp; WhatsApp</span>
+            </div>
+          </div>
+          <div class="ft-item">
+            <div class="ft-icon">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.07 6.07l.95-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="ft-item-body">
+              <a href="tel:+919220824148" class="ft-val">+91 92208 24148</a>
+              <span class="ft-note">Calls only</span>
+            </div>
+          </div>
+          <div class="ft-item">
+            <div class="ft-icon">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </div>
+            <div class="ft-item-body">
+              <a href="mailto:mridul@lumaasalon.com" class="ft-val">mridul@lumaasalon.com</a>
+              <a href="mailto:gagan.support@lumaasalon.com" class="ft-val">gagan.support@lumaasalon.com</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ft-socials">
+          <a href="https://www.instagram.com/lumaasalon.official" target="_blank" rel="noopener" class="ft-soc" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/919205809126" target="_blank" rel="noopener" class="ft-soc" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.74.46 3.38 1.26 4.8L2.05 22l5.43-1.43a9.84 9.84 0 0 0 4.56 1.11c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm4.88 13.42c-.2.56-1.16 1.08-1.6 1.14-.4.06-.93.09-1.5-.09-.35-.11-.8-.26-1.36-.52-2.39-1.02-3.96-3.41-4.08-3.57-.12-.15-.97-1.28-.97-2.44 0-1.16.61-1.73.83-1.97.22-.24.48-.3.63-.3h.45c.14 0 .34-.05.53.41.2.48.68 1.67.74 1.79.06.12.1.26.02.42-.08.16-.12.25-.24.39-.12.13-.25.3-.36.4-.12.11-.25.22-.1.44.14.22.6.97 1.27 1.57.87.77 1.6 1.01 1.83 1.12.23.11.36.09.49-.05.13-.14.56-.65.71-.88.15-.22.3-.18.5-.11.21.07 1.34.63 1.57.75.23.11.38.16.44.25.06.09.06.54-.14 1.09z"/></svg>
+          </a>
+          <a href="https://maps.google.com" target="_blank" rel="noopener" class="ft-soc" aria-label="Google Maps">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- VISIT US -->
+      <div class="ft-col">
+        <p class="ft-head">Visit Us</p>
+        <p class="ft-open-label">Open all week</p>
+        <p class="ft-hours">10:00 AM – 9:00 PM</p>
+        <p class="ft-days">Monday to Sunday</p>
+        <span class="ft-badge" id="statusBadge"><span class="ft-dot" id="statusDot"></span><span id="statusText">Open now &middot; closes 9:00 PM</span></span>
+        <a href="https://maps.google.com" target="_blank" rel="noopener" class="ft-directions">
+          <div class="ft-dir-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="ft-dir-text">
+            <span class="ft-dir-title">Get Directions</span>
+            <span class="ft-dir-sub">Open our location in Google Maps</span>
+          </div>
+          <span class="ft-dir-arrow">&#8594;</span>
+        </a>
+      </div>
+
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Lumaa Salon. All rights reserved.</p>
+      <p>All prices are subject to consultation &middot; GST extra &middot; T&amp;C apply</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', function () {
+      navLinks.classList.toggle('open');
+      this.classList.toggle('active');
+    });
+    // Close mobile menu when a link is tapped
+    navLinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // Solidify navbar on scroll
+    window.addEventListener('scroll', function () {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Scroll-reveal animations
+    const revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      revealObserver.observe(el);
+    });
+
+    // Animated number counters (fire once when stats scroll into view)
+    function runCounter(el) {
+      const target = +el.dataset.target;
+      const suffix = el.dataset.suffix || '';
+      const duration = 2000;
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+        const value = Math.floor(eased * target);
+        el.textContent = value.toLocaleString() + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    const counterObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          runCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    document.querySelectorAll('.counter').forEach(function (el) {
+      counterObserver.observe(el);
+    });
+
+    // Hero slider — translate track left every 3 s
+    (function () {
+      var track   = document.querySelector('.hero-track');
+      var dots    = document.querySelectorAll('.slide-dots .dot');
+      var total   = 3;
+      var current = 0;
+
+      function goTo(n) {
+        current = (n + total) % total;
+        // each slide is 1/3 of the track width
+        track.style.transform = 'translateX(-' + (current * 33.3333) + '%)';
+        dots.forEach(function (d, i) {
+          d.classList.toggle('active', i === current);
+        });
+      }
+
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          clearInterval(timer);
+          goTo(+this.dataset.index);
+          timer = setInterval(advance, 3000);
+        });
+      });
+
+      function advance() { goTo(current + 1); }
+      var timer = setInterval(advance, 3000);
+    })();
+    // Salon open/closed badge — open every day 10:00 AM – 9:00 PM IST
+    (function updateStatus() {
+      var dot  = document.getElementById('statusDot');
+      var text = document.getElementById('statusText');
+      if (!dot || !text) return;
+
+      var now    = new Date();
+      var hour   = now.getHours();
+      var minute = now.getMinutes();
+      var total  = hour * 60 + minute;   // minutes since midnight
+      var open   = 10 * 60;              // 10:00 AM
+      var close  = 21 * 60;              // 9:00 PM
+
+      if (total >= open && total < close) {
+        dot.style.background  = '#4ade80';
+        dot.style.boxShadow   = '0 0 0 3px rgba(74,222,128,0.25)';
+        text.textContent      = 'Open now · closes 9:00 PM';
+      } else {
+        dot.style.background  = '#f87171';
+        dot.style.boxShadow   = '0 0 0 3px rgba(248,113,113,0.25)';
+        text.textContent      = 'Closed · opens 10:00 AM';
+      }
+    })();
+  </script>
+</body>
+</html>
